@@ -1,0 +1,9 @@
+{
+  "phpap": { "db_password": "1" },
+  "mysql": {
+    "server_root_password": "1",
+    "server_repl_password": "1",
+    "server_debian_password": "1"
+  },
+  "run_list": [ "recipe[apt]", "recipe[phpap]" ]
+}
