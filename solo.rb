@@ -2,5 +2,5 @@
 
 file_cache_path "/home/dan/chef-solo"
 
-cookbook_path "/home/dan/opscode-chef-repo/cookbooks"
+cookbook_path (File.dirname(__FILE__) + "/cookbooks")
 
