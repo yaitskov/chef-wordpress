@@ -68,3 +68,27 @@ remote_file wp_secrets do
   action :create_if_missing
   mode 0644
 end
+
+
+salt_data = ''
+
+ruby_block 'fetch-salt-data' do
+  block do
+    salt_data = File.read(wp_secrets)
+  end
+  action :create
+end
+
+template node['phpap']['path'] + '/wp-config.php' do
+  source 'wp-config.php.erb'
+  mode 0755
+  owner 'root'
+  group 'root'
+  variables(
+            :database => node['phpap']['database'],
+            :user => node['phpap']['db_username'],
+            :password => node['phpap']['db_password'],
+            :wp_secrets => salt_data)
+end
+
+
