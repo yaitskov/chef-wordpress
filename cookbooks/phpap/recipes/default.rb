@@ -44,6 +44,7 @@ end
 wordpress_latest = Chef::Config[:file_cache_path] + "/wordpress-latest.tar.gz"
 remote_file wordpress_latest do
   source "http://wordpress.org/latest.tar.gz"
+  action :create_if_missing
   mode "0644"
 end
 directory node['phpap']['path'] do
@@ -58,4 +59,12 @@ execute "untar-wordpress" do
   cwd node['phpap']['path']
   command 'tar --strip-components 1 -xzf ' + wordpress_latest
   creates node['phpap']['path']  + "/wp-settings.php"
+end
+
+wp_secrets = Chef::Config[:file_cache_path] + '/wp-secrets.php'
+
+remote_file wp_secrets do
+  source 'https://api.wordpress.org/secret-key/1.1/salt/'
+  action :create_if_missing
+  mode 0644
 end
