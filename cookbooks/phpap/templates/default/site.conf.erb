@@ -1,0 +1,18 @@
+<VirtualHost *:80>
+  ServerName <%= @params[:server_name] %>
+  DocumentRoot <%= @params[:docroot] %>
+  Alias /phpap/ <%= @params[:docroot] %>/
+  <Directory <%= @params[:docroot] %>>
+    Options FollowSymLinks Indexes ExecCGI MultiViews
+    AllowOverride FileInfo Options
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+  </Directory>
+  <Directory />
+        Options FollowSymLinks Indexes ExecCGI MultiViews
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+  </Directory>
+</VirtualHost>

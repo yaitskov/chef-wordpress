@@ -20,7 +20,7 @@ include_recipe "apache2::mod_php5"
 include_recipe "mysql::ruby"
 
 apache_site "default" do
-  enable true
+  enable false
 end
 
 mysql_database node['phpap']['database'] do
@@ -92,3 +92,8 @@ template node['phpap']['path'] + '/wp-config.php' do
 end
 
 
+web_app 'phpap' do
+  template 'site.conf.erb'
+  docroot node['phpap']['path']
+  server_name node['phpap']['server_name']
+end
