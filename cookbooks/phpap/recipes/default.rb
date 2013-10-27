@@ -7,10 +7,10 @@
 # All rights reserved - Do Not Redistribute
 #
 
-include_recipe "gmake"
+# include_recipe "gmake"
 include_recipe "apache2"
-include_recipe "build-essential"
-include_recipe "openssl"
+#include_recipe "build-essential"
+#include_recipe "openssl"
 include_recipe "mysql::client"
 include_recipe "mysql::server"
 include_recipe "php"
